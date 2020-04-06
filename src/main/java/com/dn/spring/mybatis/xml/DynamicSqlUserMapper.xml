@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dn.spring.mybatis.dao.DynamicSqlUserMapper">
+
+    <resultMap id="userResultMap" type="com.dn.spring.mybatis.bean.UserDo">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+    </resultMap>
+
+    <select id="getUserListByIds" resultType="com.dn.spring.mybatis.bean.UserDo">
+        SELECT * from t_user
+        <where>
+            <if test="userIds !=null and userIds.size()>0">
+                and id in
+                <foreach collection="userIds" index="userId" open="(" separator="," close=")">
+                    #{userId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="getUserList_choose"
+            parameterType="com.dn.spring.mybatis.bean.UserDo"
+            resultType="com.dn.spring.mybatis.bean.UserDo">
+        SELECT * from t_user
+        <where>
+            <choose>
+                <when test="age!=null">
+                    age=#{age};
+                </when>
+                <when test="name!=null">
+                    name=#{name}
+                </when>
+                <otherwise>
+
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="updateUser_if_set" parameterType="com.dn.spring.mybatis.bean.UserDo">
+        UPDATE t_user
+        <set>
+            <if test="age!=null and age !=''">
+                age=#{age},
+            </if>
+            <if test="name!=null and name !=''">
+                name=#{name},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--
+     trim是更灵活的去处多余关键字的标签，
+     if/trim代替set(判断参数) - 将实体类不为空的属性更新
+     -->
+    <update id="updateUser_if_trim" parameterType="com.dn.spring.mybatis.bean.UserDo">
+        UPDATE t_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="age!=null and age !=''">
+                age=#{age},
+            </if>
+            <if test="name!=null and name !=''">
+                name=#{name},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+
+    <!--sql片段-->
+    <sql id="query_user_where_sql">
+        <if test="id!=null and id!=''">
+            id=#{id}
+        </if>
+    </sql>
+    <select id="query_user_byId_2" resultType="com.dn.spring.mybatis.bean.UserDo">
+        SELECT * from t_user
+        <where>
+            <include refid="query_user_where_sql"/>
+        </where>
+    </select>
+
+</mapper>
