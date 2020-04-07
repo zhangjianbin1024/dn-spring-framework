@@ -17,6 +17,7 @@ import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Intercepts(
+        //每配置一个 @Signature 则就可以拦截一个方法
         // 这里指要拦截 Executor 类中的 query 方法
         {@Signature(method = "query", type = Executor.class,
                 //根据参数的类型找对应的方法
