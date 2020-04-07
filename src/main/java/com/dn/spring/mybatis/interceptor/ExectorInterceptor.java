@@ -50,6 +50,11 @@ public class ExectorInterceptor implements Interceptor {
         return invocation.proceed();
     }
 
+    /**
+     * 这个方法会被 InterceptorChain.pluginAll 调用到
+     * @param target
+     * @return
+     */
     @Override
     public Object plugin(Object target) {
         //必须判断是否是拦截的类型
