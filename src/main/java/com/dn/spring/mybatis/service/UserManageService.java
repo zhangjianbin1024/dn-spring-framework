@@ -37,9 +37,44 @@ public class UserManageService {
         userMapper.save(userDo);
         logger.info("execut-1 事务执行");
 
-        //事务二
+        //事务二 抛出异常
         insertUserService.execute();
 
+
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void execut2() {
+        UserDo userDo = new UserDo();
+        userDo.setName("10");
+        userDo.setAge(10);
+        userMapper.save(userDo);
+        logger.info("execut2-1 事务执行");
+
+        //事务二 正常提交
+        //当事务二为 Propagation.REQUIRES_NEW 时，事务二的数据提交，则事务一的数据回滚
+        insertUserService.execute2();
+
+        //事务一 抛出异常
+        throw new RuntimeException("回滚");
+
+    }
+
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void execut3() {
+        UserDo userDo = new UserDo();
+        userDo.setName("10");
+        userDo.setAge(10);
+        userMapper.save(userDo);
+        logger.info("execut3-1 事务执行");
+
+        try {
+            //事务二 异常
+            insertUserService.execute3();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

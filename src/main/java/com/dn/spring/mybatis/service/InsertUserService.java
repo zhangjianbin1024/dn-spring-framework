@@ -41,4 +41,32 @@ public class InsertUserService {
 
         throw new RuntimeException("回滚");
     }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void execute2() {
+        UserDo userDo = new UserDo();
+        userDo.setAge(50);
+        userDo.setName("50");
+
+        int save = userMapper.save(userDo);
+        logger.info("execute-2 事务执行");
+
+
+    }
+
+    //@Transactional
+    //@Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void execute3() {
+        UserDo userDo = new UserDo();
+        userDo.setAge(50);
+        userDo.setName("50");
+
+        int save = userMapper.save(userDo);
+        logger.info("execute-2 事务执行");
+
+        //事务二 抛出异常
+        throw new RuntimeException("回滚");
+
+
+    }
 }

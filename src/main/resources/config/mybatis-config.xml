@@ -16,9 +16,9 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
-    <plugins>
-        <plugin interceptor="com.dn.spring.mybatis.interceptor.ExectorInterceptor"/>
-        <plugin interceptor="com.dn.spring.mybatis.interceptor.PageInterceptor"/>
-        <plugin interceptor="com.dn.spring.mybatis.interceptor.ResultSetCacheInterceptor"/>
-    </plugins>
+    <!--<plugins>-->
+    <!--    <plugin interceptor="com.dn.spring.mybatis.interceptor.ExectorInterceptor"/>-->
+    <!--    <plugin interceptor="com.dn.spring.mybatis.interceptor.PageInterceptor"/>-->
+    <!--    <plugin interceptor="com.dn.spring.mybatis.interceptor.ResultSetCacheInterceptor"/>-->
+    <!--</plugins>-->
 </configuration>
