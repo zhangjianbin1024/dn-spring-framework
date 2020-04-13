@@ -1,13 +1,15 @@
 package com.dn.spring.cglib;
 
-import java.lang.reflect.Method;
-
 import net.sf.cglib.proxy.CallbackFilter;
+
+import java.lang.reflect.Method;
 
 public class MethodCallBackFilter implements CallbackFilter {
 
     /**
-     * return值为被代理类的各个方法在回调数组Callback[]中的位置索引
+     * 当调用代理对象的方法的时候，具体会走哪个Callback呢，
+     * 此时会通过CallbackFilter中的 accept 来判断，这个方法返回 callbacks 数组的索引。
+     * <p>
      */
     @Override
     public int accept(Method method) {

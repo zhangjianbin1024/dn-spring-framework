@@ -10,8 +10,9 @@ public class TargetClass {
         System.out.println("add");
     }
     
-    public void del() {
+    public String del() {
         System.out.println("del");
+        return "del";
     }
     
     public void update() {
