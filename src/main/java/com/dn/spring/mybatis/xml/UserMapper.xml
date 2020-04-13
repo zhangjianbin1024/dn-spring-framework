@@ -36,7 +36,7 @@
     <!--sql片段-->
     <sql id="query_user_where_sql">
         <if test="id!=null and id!=''">
-             id=#{id}
+            id=#{id}
         </if>
     </sql>
     <select id="selectUserById" resultType="com.dn.spring.mybatis.bean.UserDo">
@@ -44,6 +44,10 @@
         <where>
             <include refid="query_user_where_sql"/>
         </where>
+    </select>
+
+    <select id="queryPage" resultType="com.dn.spring.mybatis.bean.UserDo">
+         SELECT * from t_user
     </select>
 
 </mapper>

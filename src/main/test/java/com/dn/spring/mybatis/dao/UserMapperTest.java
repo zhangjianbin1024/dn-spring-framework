@@ -2,10 +2,14 @@ package com.dn.spring.mybatis.dao;
 
 import com.dn.spring.BaseTest;
 import com.dn.spring.mybatis.bean.UserDo;
+import com.dn.spring.mybatis.interceptor.Page;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -53,5 +57,22 @@ public class UserMapperTest extends BaseTest {
     public void selectUserById() {
         UserDo userDo = userMapper.selectUserById(1);
         logger.info("selectUserById:[{}]", userDo);
+    }
+
+    @Test
+    public void queryPage() {
+        HashMap<String, Object> map = new HashMap<>();
+
+        Page page = new Page();
+        page.setBeginPage(1);
+        page.setPageSize(15);
+        //需要分页
+        page.setNeedPage(true);
+        map.put("page", page);
+        map.put("isCache", true);
+        map.put("cacheKey", "queryUser");
+        map.put("type", 1);
+        List<UserDo> userDos = userMapper.queryPage(map);
+        System.out.println(userDos);
     }
 }

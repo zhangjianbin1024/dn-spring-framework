@@ -4,9 +4,9 @@ import com.dn.spring.mybatis.SqlProvider;
 import com.dn.spring.mybatis.bean.UserDo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectProvider;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: zh
@@ -36,4 +36,6 @@ public interface UserMapper {
      */
     @SelectProvider(type = SqlProvider.class, method = "count")
     int countProvider(Integer id);
+
+    List<UserDo> queryPage(Map<String,Object> map);
 }

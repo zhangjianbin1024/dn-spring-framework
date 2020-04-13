@@ -23,13 +23,20 @@ import java.util.concurrent.ConcurrentHashMap;
                 //根据参数的类型找对应的方法
                 args = {
                         MappedStatement.class, Object.class, RowBounds.class,
-                        ResultHandler.class})
-        }
+                        ResultHandler.class}
+        )}
 )
 public class ExectorInterceptor implements Interceptor {
 
     public static final Map<String, String> cacheMap = new ConcurrentHashMap();
 
+    /**
+     * 代理类调用方法时，会进入该方法
+     *
+     * @param invocation
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         if (invocation.getTarget() instanceof Executor) {
@@ -60,6 +67,7 @@ public class ExectorInterceptor implements Interceptor {
     public Object plugin(Object target) {
         //必须判断是否是拦截的类型
         if (target instanceof Executor) {
+            //返回当前插件的代理类
             return Plugin.wrap(target, this);
         }
         return target;

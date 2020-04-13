@@ -14,7 +14,11 @@ import java.util.Map;
 import java.util.Properties;
 
 
-@Intercepts({@Signature(type = ResultSetHandler.class, method = "handleResultSets", args = {Statement.class})})
+@Intercepts(
+        {
+                @Signature(type = ResultSetHandler.class, method = "handleResultSets",
+                        args = {Statement.class})
+        })
 public class ResultSetCacheInterceptor implements Interceptor {
 
     @Override
@@ -25,8 +29,7 @@ public class ResultSetCacheInterceptor implements Interceptor {
             boundSqlf.setAccessible(true);
             BoundSql boundSql = (BoundSql) boundSqlf.get(rsh);
             Map map = (Map) boundSql.getParameterObject();
-            if (map.get("isCache") != null
-                    && Boolean.valueOf(map.get("isCache").toString())) {
+            if (map.containsKey("isCache")) {
                 List<Object> results = (List<Object>) invocation.proceed();
                 String resultStr = JSONArray.toJSONString(results);
                 ExectorInterceptor.cacheMap.put(map.get("cacheKey").toString(), resultStr);
@@ -53,7 +56,6 @@ public class ResultSetCacheInterceptor implements Interceptor {
 
     @Override
     public void setProperties(Properties properties) {
-        // TODO Auto-generated method stub
 
     }
 
