@@ -1,6 +1,6 @@
 package com.dn.spring.mybatis.dao;
 
-import com.dn.spring.BaseTest;
+import com.dn.spring.BaseXmlTest;
 import com.dn.spring.mybatis.bean.UserDo;
 import com.dn.spring.mybatis.interceptor.Page;
 import org.junit.Test;
@@ -11,13 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * @author: zh
  * @date: 2020/4/4/004 11:57
  */
-public class UserMapperTest extends BaseTest {
+public class UserMapperTest extends BaseXmlTest {
     private Logger logger = LoggerFactory.getLogger(UserMapperTest.class);
 
     @Autowired

@@ -15,7 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 
-public class SpringTest extends BaseTest implements ApplicationContextAware {
+public class SpringTest extends BaseXmlTest implements ApplicationContextAware {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SpringTest.class);
 

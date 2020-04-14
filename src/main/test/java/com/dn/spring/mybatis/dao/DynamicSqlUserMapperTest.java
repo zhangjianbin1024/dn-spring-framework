@@ -1,6 +1,6 @@
 package com.dn.spring.mybatis.dao;
 
-import com.dn.spring.BaseTest;
+import com.dn.spring.BaseXmlTest;
 import com.dn.spring.mybatis.bean.UserDo;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.List;
 
-public class DynamicSqlUserMapperTest extends BaseTest {
+public class DynamicSqlUserMapperTest extends BaseXmlTest {
 
     private Logger logger = LoggerFactory.getLogger(DynamicSqlUserMapperTest.class);
 

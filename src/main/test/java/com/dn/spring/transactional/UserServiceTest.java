@@ -1,6 +1,6 @@
 package com.dn.spring.transactional;
 
-import com.dn.spring.BaseTest;
+import com.dn.spring.BaseXmlTest;
 import com.dn.spring.mybatis.bean.UserDo;
 import com.dn.spring.mybatis.service.InsertUserService;
 import com.dn.spring.mybatis.service.QueryUserService;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author: zh
  * @date: 2020/4/3/003 21:46
  */
-public class UserServiceTest extends BaseTest {
+public class UserServiceTest extends BaseXmlTest {
     @Autowired
     private InsertUserService insertUserService;
 
