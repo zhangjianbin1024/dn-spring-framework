@@ -4,6 +4,9 @@ import com.dn.spring.annotationaop.AspectjInterceptor;
 import com.dn.spring.config.ConfigBean;
 import com.dn.spring.config.EnableConfigBean;
 import com.dn.spring.config.ImportConfigBean;
+import com.dn.spring.generic.DaoConfig;
+import com.dn.spring.generic.service.OrderService;
+import com.dn.spring.generic.service.UserService;
 import com.dn.spring.jdkproxy.service.ServiceA;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -104,5 +107,15 @@ public class SpringContextTest {
 
         ServiceA service1 = context.getBean(ServiceA.class);
         service1.m1();
+    }
+
+    /**
+     * 泛型注入测试
+     */
+    @Test
+    public void test7() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoConfig.class);
+        System.out.println(context.getBean(UserService.class).getDao());
+        System.out.println(context.getBean(OrderService.class).getDao());
     }
 }
