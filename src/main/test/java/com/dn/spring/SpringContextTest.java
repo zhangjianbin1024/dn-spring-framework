@@ -13,6 +13,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringContextTest {
 
 
+    /**
+     * 测试 注解方式的spring 容器 AnnotationConfigApplicationContext
+     */
     @Test
     public void t1() {
         // 通过 AnnotationConfigApplicationContext 创建spring 容器
@@ -48,6 +51,9 @@ public class SpringContextTest {
         }
     }
 
+    /**
+     * 获取 ConfigBean 配置类中的bean
+     */
     @Test
     public void t3() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ConfigBean.class);
@@ -58,6 +64,9 @@ public class SpringContextTest {
         }
     }
 
+    /**
+     * 测试 @Import(MyImportBeanDefinitionRegistrar.class) 注解
+     */
     @Test
     public void test4() {
         //1.通过AnnotationConfigApplicationContext创建spring容器，参数为@Import标注的类
@@ -68,6 +77,9 @@ public class SpringContextTest {
         }
     }
 
+    /**
+     * 测试 @Import(MyImportSelector.class)
+     */
     @Test
     public void test5() {
         //1.通过AnnotationConfigApplicationContext创建spring容器，参数为@Import标注的类
@@ -78,6 +90,9 @@ public class SpringContextTest {
         }
     }
 
+    /**
+     * 测试  @EnableMethodCostTime
+     */
     @Test
     public void test6() {
         //1.通过AnnotationConfigApplicationContext创建spring容器，参数为@Import标注的类
