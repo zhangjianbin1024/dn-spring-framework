@@ -97,6 +97,14 @@ public class PageInterceptor implements Interceptor {
         return field;
     }
 
+    /**
+     * 插件要拦截的对象是 RoutingStatementHandler
+     * <p>
+     * RoutingStatementHandler 是 StatementHandler 类的实现类
+     *
+     * @param target
+     * @return
+     */
     @Override
     public Object plugin(Object target) {
         if (target instanceof RoutingStatementHandler) {

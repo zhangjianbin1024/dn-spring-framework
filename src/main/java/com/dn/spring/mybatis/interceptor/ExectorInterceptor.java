@@ -16,6 +16,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * sql查询时，先查询缓存
+ */
 @Intercepts(
         //每配置一个 @Signature 则就可以拦截一个方法
         // 这里指要拦截 Executor 类中的 query 方法
@@ -41,8 +44,10 @@ public class ExectorInterceptor implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         if (invocation.getTarget() instanceof Executor) {
             Map map = (Map) invocation.getArgs()[1];
+            // 执行sql的参数中有 cacheKey时
             String cacheKey = map.containsKey("cacheKey") ? map.get("cacheKey")
                     .toString() : "";
+            // 从缓存容器器中获取缓存的结果并返回，不再查询数据库
             String cacheStr = cacheMap.get(cacheKey);
             if (cacheStr != null && !"".equals(cacheStr)) {
                 JSONArray ja = JSONArray.parseArray(cacheStr);

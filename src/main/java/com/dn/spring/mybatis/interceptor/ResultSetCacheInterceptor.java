@@ -14,6 +14,9 @@ import java.util.Map;
 import java.util.Properties;
 
 
+/**
+ * 对 查询结果进行缓存
+ */
 @Intercepts(
         {
                 @Signature(type = ResultSetHandler.class, method = "handleResultSets",
@@ -23,15 +26,22 @@ public class ResultSetCacheInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
+
         if (invocation.getTarget() instanceof DefaultResultSetHandler) {
             DefaultResultSetHandler rsh = (DefaultResultSetHandler) invocation.getTarget();
             Field boundSqlf = getField(rsh, "boundSql");
             boundSqlf.setAccessible(true);
             BoundSql boundSql = (BoundSql) boundSqlf.get(rsh);
+
+            // 获取sql 的参数
             Map map = (Map) boundSql.getParameterObject();
             if (map.containsKey("isCache")) {
+                //判断查询是否需要缓存
+
+                // sql 查询结果
                 List<Object> results = (List<Object>) invocation.proceed();
                 String resultStr = JSONArray.toJSONString(results);
+                // sql查询结果进行缓存
                 ExectorInterceptor.cacheMap.put(map.get("cacheKey").toString(), resultStr);
                 return results;
             }

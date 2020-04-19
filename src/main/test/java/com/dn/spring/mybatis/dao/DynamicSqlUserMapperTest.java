@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * mybatis 动态sql查询 测试
+ */
 public class DynamicSqlUserMapperTest extends BaseXmlTest {
 
     private Logger logger = LoggerFactory.getLogger(DynamicSqlUserMapperTest.class);
