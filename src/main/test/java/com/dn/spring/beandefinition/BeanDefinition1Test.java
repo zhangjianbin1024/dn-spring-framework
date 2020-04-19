@@ -7,6 +7,9 @@ import org.springframework.beans.factory.support.*;
 
 import java.util.Arrays;
 
+/**
+ * Bean元信息配置阶段
+ */
 public class BeanDefinition1Test {
 
     /**

@@ -12,4 +12,9 @@
     <bean id="loginResource" name="loginResource" class="com.zhang.spring.service.LoginResource">
         <property name="loginService" ref="loginService"/>
     </bean>
+
+    <!--设置父bean-->
+    <bean id="lesson2" parent="loginResource">
+        <property name="name" value="spring系列"/>
+    </bean>
 </beans>

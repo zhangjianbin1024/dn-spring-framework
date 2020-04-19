@@ -1,5 +1,7 @@
 package com.dn.spring.jdkproxy.service;
 
+import javax.annotation.PreDestroy;
+
 public class ServiceB implements IService {
 
     private ServiceA serviceA;
@@ -14,6 +16,14 @@ public class ServiceB implements IService {
 
     public ServiceB(ServiceA serviceA) {
         this.serviceA = serviceA;
+    }
+
+    public ServiceB() {
+    }
+
+    @PreDestroy
+    public void preDestroy() { //@1
+        System.out.println("preDestroy()");
     }
 
     @Override

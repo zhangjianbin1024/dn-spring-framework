@@ -6,6 +6,9 @@ import org.springframework.beans.factory.support.GenericBeanDefinition;
 
 import java.util.Arrays;
 
+/**
+ * 将Bean注册到容器中
+ */
 public class BeanDefinition3Test {
     /**
      * 注册定义的 BeanDefinition

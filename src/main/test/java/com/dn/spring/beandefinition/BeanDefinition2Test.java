@@ -7,6 +7,9 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
 
+/**
+ * Bean元信息解析阶段
+ */
 public class BeanDefinition2Test {
     /**
      * xml方式bean配置信息解析
@@ -88,6 +91,9 @@ public class BeanDefinition2Test {
         //通过 BeanPostProcessor 实现类，实现注解注入bean实例
         factory.getBeansOfType(BeanPostProcessor.class).values()
                 .forEach(factory::addBeanPostProcessor); // @1
+
+        //输出中可以看出service1这个bean的beanDefinition中lazyInit确实为true，
+        // primary也为true，scope为prototype，说明类Service1注解上标注3个注解信息被解析之后放在了beanDefinition中
 
         //打印出注册的bean的配置信息
         for (String beanName : new String[]{"service1", "service2"}) {
