@@ -23,6 +23,14 @@ public class UserMapperTest extends BaseXmlTest {
     @Autowired
     private UserMapper userMapper;
 
+    @Test
+    public void save(){
+        UserDo userDo = new UserDo();
+        //userDo.setAge(11);
+        userDo.setName("zhang");
+        userMapper.save(userDo);
+    }
+
     /**
      * 对 @SelectProvider 注解测试
      */

@@ -31,7 +31,9 @@ public class PageInterceptor implements Interceptor {
      * 我们的最终目的是修改BoundSql中的sql，所有就需要拿到被代理类中的BoundSql对象
      *
      * @param invocation
+     *
      * @return
+     *
      * @throws Throwable
      */
     @Override
@@ -63,16 +65,18 @@ public class PageInterceptor implements Interceptor {
         //获取sql 字符串
         String sql = boundSql.getSql();
         // 获取sql的入参
-        Map paramObject = (Map) boundSql.getParameterObject();
-
-        if (paramObject.containsKey("page")) {
-            //获取 page 对象
-            Page page = (Page) paramObject.get("page");
-            if (!page.isNeedPage()) {
-                //不需要分页时
-                return invocation.proceed();
+        Object parameterObject = boundSql.getParameterObject();
+        if (parameterObject instanceof Map) {
+            Map paramObject = (Map) parameterObject;
+            if (paramObject.containsKey("page")) {
+                //获取 page 对象
+                Page page = (Page) paramObject.get("page");
+                if (!page.isNeedPage()) {
+                    //不需要分页时
+                    return invocation.proceed();
+                }
+                sql = pageSql(sql, page);
             }
-            sql = pageSql(sql, page);
         }
 
         Field sqlF = getField(boundSql, "sql");
@@ -103,6 +107,7 @@ public class PageInterceptor implements Interceptor {
      * RoutingStatementHandler 是 StatementHandler 类的实现类
      *
      * @param target
+     *
      * @return
      */
     @Override

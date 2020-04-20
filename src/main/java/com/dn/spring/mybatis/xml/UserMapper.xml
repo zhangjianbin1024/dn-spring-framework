@@ -8,8 +8,33 @@
         <result column="age" property="age"/>
     </resultMap>
 
-    <insert id="save">
-        INSERT INTO t_user (`name`, `age`) VALUES (#{name}, #{age});
+    <!-- 对应的插入字段的名字 -->
+    <sql id="key">
+        <trim suffixOverrides=",">
+            <if test="name !=null and name !=''">
+                name,
+            </if>
+            <if test="age !=null and age !=''">
+                age,
+            </if>
+        </trim>
+    </sql>
+
+    <!-- 对应的插入字段的值 -->
+    <sql id="values">
+        <trim suffixOverrides=",">
+            <if test="name != null and name!='' ">
+                #{name},
+            </if>
+            <if test="age != null and age!=''">
+                #{age},
+            </if>
+        </trim>
+    </sql>
+
+    <insert id="save" parameterType="com.dn.spring.mybatis.bean.UserDo">
+        INSERT INTO t_user(<include refid="key"/>)
+        VALUES (<include refid="values"/>);
     </insert>
 
     <update id="update">
