@@ -90,7 +90,10 @@ public class BeanDefinition2Test {
 
         //通过 BeanPostProcessor 实现类，实现注解注入bean实例
         factory.getBeansOfType(BeanPostProcessor.class).values()
-                .forEach(factory::addBeanPostProcessor); // @1
+                .forEach(obj -> {
+                    System.out.println("BeanPostProcessor=====>>" + obj.getClass());
+                    factory.addBeanPostProcessor(obj);
+                }); // @1
 
         //输出中可以看出service1这个bean的beanDefinition中lazyInit确实为true，
         // primary也为true，scope为prototype，说明类Service1注解上标注3个注解信息被解析之后放在了beanDefinition中
